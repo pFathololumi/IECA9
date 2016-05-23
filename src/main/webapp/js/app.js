@@ -11,7 +11,7 @@
 
         $scope.symbolsQ = [];
         $scope.userInst = [];
-
+        $scope.activeContent = 'content.html';
         $scope.init = function () {
             $http({
                 method: 'GET',
