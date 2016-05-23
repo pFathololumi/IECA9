@@ -50,7 +50,7 @@ public class RoleDAO {
         dbConnection.createStatement().execute(insertRoles);
     }
     
-    public static Role findByRoleName(String name, Connection dbConnection) throws SQLException, DBException{
+    public static Role findByRoleName(String name, Connection dbConnection) throws SQLException{
         PreparedStatement preparedStatement = dbConnection.prepareStatement(selectByCidQuery);
         preparedStatement.setString(1, name);
         ResultSet rs = preparedStatement.executeQuery();
@@ -59,8 +59,8 @@ public class RoleDAO {
                     rs.getBoolean("confdeposit"), rs.getBoolean("conftransact"), rs.getBoolean("addsymbol"),
                     rs.getBoolean("transactlimit"),rs.getBoolean("confnewsymbol"), rs.getBoolean("report"),
                     rs.getBoolean("rolemanager"),rs.getBoolean("userprofiles"), rs.getBoolean("backup"));
-            return null;
+            return r;
         }
-        throw new DBException("Unable to find role '"+name+"'");
+        throw new SQLException("Unable to find role '"+name+"'");
     }
 }

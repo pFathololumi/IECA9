@@ -33,32 +33,26 @@ public class CustomerRoleDAO {
     
     public static void createRoleTable(Connection dbConnection) throws SQLException{
         dbConnection.createStatement().execute(createCustomerRoleTableQuery);
-        insertRole("1", "admin", dbConnection);
     }
    
-    private static void insertRole(String cid, String roleName,Connection dbConnection) throws SQLException{
+    public static void insertRole(String cid, String roleName,Connection dbConnection) throws SQLException{
         PreparedStatement preparedStatement = dbConnection.prepareStatement(insertNewCustomerRole);
         preparedStatement.setString(1, cid);
         preparedStatement.setString(2, roleName);
         preparedStatement.executeUpdate();
     }
     
-//    public static List<Role> findByCustomerID(String cid, Connection dbConnection) throws SQLException, DBException{
-//        PreparedStatement preparedStatement = dbConnection.prepareStatement(selectByCidQuery);
-//        preparedStatement.setString(1, cid);
-//        ResultSet rs = preparedStatement.executeQuery();
-//        List<Role> insts = new ArrayList<Role>();
-//        while(rs.next()){
-//            Role r = RoleDAO.findByRoleName(rs.getString(), dbConnection);
-//            Instrument i = new Instrument(rs.getString("symbol"), rs.getLong("quantity"));
-//            List<Offering> offers = InstrumentOfferingDAO.selectByCidAndSymbol(cid, rs.getString("symbol"), dbConnection);
-//            for(Offering o : offers)
-//                if(o instanceof SellingOffer)
-//                    i.addSellingOffer((SellingOffer)o);
-//                else if(o instanceof BuyingOffer)
-//                    i.addBuyingOffer((BuyingOffer)o);
-//            insts.add(i);
-//        }
-//        return insts;
-//    }
+    public static List<Role> findByCustomerID(String cid, Connection dbConnection) throws SQLException, DBException{
+        PreparedStatement preparedStatement = dbConnection.prepareStatement(selectByCidQuery);
+        preparedStatement.setString(1, cid);
+        ResultSet rs = preparedStatement.executeQuery();
+        List<Role> roles = new ArrayList<Role>();
+        while(rs.next()){
+            Role r = RoleDAO.findByRoleName(rs.getString("role_name"), dbConnection);
+            roles.add(r);
+        }
+        if(roles.isEmpty())
+            throw new DBException("No Role assigned to user'"+cid+"'");
+        return roles;
+    }
 }

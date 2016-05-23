@@ -10,6 +10,8 @@ create table customer (
     id varchar(80) not null,
     name varchar(80) not null,
     family varchar(80) not null,
+    email varchar(100) not null,
+    password varchar(200) not null,
     balance bigint not null,
     primary key (id)
 );
@@ -79,7 +81,7 @@ create table transaction(
     time timestamp default now
 );
 
-insert into customer values ('1', 'admin','password',0);
+insert into customer values ('1', 'admin','password','password','stock@bonjol.com',0);
 insert into instrument values ('1', 'RANA', 200);
 insert into offering (customer_id, price, quantity, type, kind) values ('1', 100, 20, 'GTC', 0);
 insert into instr_offer values ('1', 'RANA', 0);

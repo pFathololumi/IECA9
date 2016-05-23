@@ -17,16 +17,23 @@ public class Customer {
     private String id;
     private String name;
     private String family;
+    private String email;
+    private String password;
     private Account customerAccount;
     private List<Instrument> instruments;
+    private List<Role> roles;
 
-    public Customer(String id,String n,String f){
-            this.id = id;
-            this.name = n;
-            this.family = f;
-            this.customerAccount = new Account();
-            this.instruments = new ArrayList<Instrument>();
+    public Customer(String id, String name, String family, String email, String password) {
+        this.id = id;
+        this.name = name;
+        this.family = family;
+        this.password = password;
+        this.email = email;
+        this.customerAccount = new Account();
+        this.instruments = new ArrayList<Instrument>();
+        this.roles = new ArrayList<Role>();
     }
+    
 
     public String getId() {
             return id;
@@ -85,6 +92,26 @@ public class Customer {
     
     public String getFamily() {
         return family;
+    }
+
+    public List<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<Role> roles) {
+        this.roles = roles;
+    }
+    
+    public void addRole(Role r){
+        roles.add(r);
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public String getEmail() {
+        return email;
     }
     
 }

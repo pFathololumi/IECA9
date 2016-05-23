@@ -68,12 +68,13 @@ public class ConfDB extends HttpServlet{
         TransactionDAO.dropTableIfExist(dbConnection);
     }
     protected void createTables(Connection dbConnection) throws SQLException{
-        CustomerDAO.createCustomerTable(dbConnection);
         RoleDAO.createRoleTable(dbConnection);
+        CustomerDAO.createCustomerTable(dbConnection);
         CustomerRoleDAO.createRoleTable(dbConnection);
         InstrumentDAO.createInstrumentTable(dbConnection);
         OfferingDAO.createOfferingTable(dbConnection);
         InstrumentOfferingDAO.createInstrOfferTable(dbConnection);
         TransactionDAO.createTransactionTable(dbConnection);
+        CustomerDAO.insertAdmin(dbConnection);
     }
 }

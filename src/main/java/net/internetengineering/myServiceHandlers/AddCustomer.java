@@ -15,7 +15,9 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.http.HttpServlet;
+import net.internetengineering.domain.Role;
 import net.internetengineering.exception.DBException;
+import net.internetengineering.model.RoleDAO;
 import net.internetengineering.utils.HSQLUtil;
 
 @WebServlet("/add")
@@ -28,8 +30,10 @@ public class AddCustomer extends HttpServlet{
                 String id = request.getParameter("id");
                 String name = request.getParameter("name");
                 String family = request.getParameter("family");
-                if (id == null || id.isEmpty() || name == null || name.isEmpty()
-                            || family == null || family.isEmpty()) {
+                String email = request.getParameter("email");
+                String password = request.getParameter("password");
+                if (id == null|| name == null || email==null || password==null|| family == null||  
+                        id.isEmpty() || name.isEmpty() || family.isEmpty()|| email.isEmpty() || password.isEmpty()) {
                     throw new DataIllegalException("Mismatched Parameters");
                 }
                 dbConnection = HSQLUtil.getInstance().openConnectioin();
@@ -37,7 +41,9 @@ public class AddCustomer extends HttpServlet{
                     throw new DataIllegalException("Repeated id");
 
                 } else {
-                    StockMarket.getInstance().addNewCustomer(new Customer(id, name, family),dbConnection);
+                    Customer c = new Customer(id, name, family,email,password);
+                    c.addRole(RoleDAO.findByRoleName("typical", dbConnection));
+                    StockMarket.getInstance().addNewCustomer(c,dbConnection);
                     out.println("New user is added");
                 }
             }catch (DataIllegalException ex){
