@@ -23,9 +23,11 @@ import javax.servlet.http.HttpServletResponse;
 import net.internetengineering.domain.Transaction;
 import net.internetengineering.exception.DBException;
 import net.internetengineering.model.CustomerDAO;
+import net.internetengineering.model.CustomerRoleDAO;
 import net.internetengineering.model.InstrumentDAO;
 import net.internetengineering.model.InstrumentOfferingDAO;
 import net.internetengineering.model.OfferingDAO;
+import net.internetengineering.model.RoleDAO;
 import net.internetengineering.model.TransactionDAO;
 import net.internetengineering.utils.HSQLUtil;
 
@@ -60,11 +62,15 @@ public class ConfDB extends HttpServlet{
         InstrumentOfferingDAO.dropTableIfExist(dbConnection);
         InstrumentDAO.dropTableIfExist(dbConnection);
         OfferingDAO.dropTableIfExist(dbConnection);
+        CustomerRoleDAO.dropTableIfExist(dbConnection);
+        RoleDAO.dropTableIfExist(dbConnection);
         CustomerDAO.dropTableIfExist(dbConnection);
         TransactionDAO.dropTableIfExist(dbConnection);
     }
     protected void createTables(Connection dbConnection) throws SQLException{
         CustomerDAO.createCustomerTable(dbConnection);
+        RoleDAO.createRoleTable(dbConnection);
+        CustomerRoleDAO.createRoleTable(dbConnection);
         InstrumentDAO.createInstrumentTable(dbConnection);
         OfferingDAO.createOfferingTable(dbConnection);
         InstrumentOfferingDAO.createInstrOfferTable(dbConnection);
