@@ -26,11 +26,12 @@ public class CustomerDAO {
                 "    family varchar(80) not null," +
                 "    email varchar(100) not null," +
                 "    password varchar(200) not null," +
-                "    balance bigint not null," +
+                "    balance bigint default 0 not null ," +
                 "    primary key (id)" +
                 ");";
     private final static String insertQuery = "insert into customer values (?, ?,?,?,?,?)";
     private final static String selectByIdQuery = "select * from customer c where c.id=?";
+    private final static String selectByIdAndPassQuery = "select * from customer c where c.id=? and c.password=?";
     private final static String updateBalance = "update customer set balance = ? where id =?";
     
     public static void dropTableIfExist(Connection dbConnection) throws SQLException{
@@ -86,6 +87,17 @@ public class CustomerDAO {
     public static Boolean containCustomer(String id, Connection dbConnection) throws SQLException{
         PreparedStatement preparedStatement = dbConnection.prepareStatement(selectByIdQuery);
         preparedStatement.setString(1, id);
+        ResultSet rs = preparedStatement.executeQuery();
+        if(rs.next())
+            return true;
+        else
+            return false;
+    }
+
+    public static boolean authenticateCustomer(String id, String pass, Connection dbConnection) throws SQLException {
+        PreparedStatement preparedStatement = dbConnection.prepareStatement(selectByIdAndPassQuery);
+        preparedStatement.setString(1, id);
+        preparedStatement.setString(2, HashUtil.md5(pass));
         ResultSet rs = preparedStatement.executeQuery();
         if(rs.next())
             return true;

@@ -4,7 +4,7 @@ To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
-<html ng-app="myApp">
+<html >
     <head>
         <meta charset="UTF-8">
         <title>stock market</title>
@@ -18,7 +18,7 @@ and open the template in the editor.
         <link rel="stylesheet" href="fonts/myFonts.css">
 
     </head>
-    <body>
+    <body ng-app="stockmarket" ng-controller="MarketController as ctrl">
 
     <div class="form Font">
       
@@ -32,25 +32,25 @@ and open the template in the editor.
         <div id="login">   
           <h1>خوش آمدید</h1>
           
-          <form method="post">
+          <form >
           
             <div class="field-wrap">
             <label>
               نام کاربری<span class="req">*</span>
             </label>
-            <input type="text" required autocomplete="off" autofocus/>
+            <input type="text" required autocomplete="off" autofocus ng-model="enteredID"/>
           </div>
           
           <div class="field-wrap">
             <label>
               رمز عبور<span class="req">*</span>
             </label>
-            <input type="password" required autocomplete="off"/>
+            <input type="password" required autocomplete="off" ng-model="enteredPass"/>
           </div>
           
           <!--<p class="forgot"><a href="#">Forgot Password?</a></p>-->
           
-          <button class="button button-block"/>ورود</button>
+          <button class="button button-block" ng-click="ctrl.doLogin()" target="_self">ورود</button>
           
           </form>
 
@@ -111,7 +111,7 @@ and open the template in the editor.
               
           </div>
           
-          <button type="submit" class="button button-block"/>ثبت</button>
+              <button type="submit" class="button button-block" >ثبت</button>
           
           </form>
 
@@ -122,8 +122,12 @@ and open the template in the editor.
 </div> <!-- /form -->
     <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
 
-        <script src="js/index.js"></script>
-        <script src="js/myApp.js"></script>
+    <script type="text/javascript" src="lib/jquery.js"></script>
+    <!-- Angular -->
+    <script type="text/javascript" src="lib/angular.min.js"></script>
+        
+    <script src="js/index.js"></script>
+    <script type="text/javascript" src="js/app.js"></script>
 
   </body>
 </html>

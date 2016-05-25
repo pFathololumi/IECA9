@@ -171,4 +171,8 @@ public class StockMarket {
         buyer.updateInstruments("add", count, symbol,dbConnection);
 
     }
+
+    public boolean authenticateCustomer(String id, String pass, Connection dbConnection) throws SQLException {
+        return CustomerDAO.authenticateCustomer(id, pass, dbConnection);
+    }
 }

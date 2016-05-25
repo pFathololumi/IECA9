@@ -6,9 +6,12 @@
 
 (function () {
     var app = angular.module('stockmarket', []);
+    var login = true;
 
     app.controller('MarketController', ['$scope', '$http', '$interval', function ($scope, $http, $interval) {
-
+            
+        $scope.isLogin = login;    
+    
         $scope.symbolsQ = [];
         $scope.userInst = [];
         $scope.activeContent = 'content.html';
@@ -52,25 +55,31 @@
         this.closeNotificationBar = function () {
             $scope.notification = null;
         }
+        
 
         this.doLogin = function () {
             $http({
                 method: 'GET',
                 url: 'getcustomer',
-                params: { 'id': $scope.enteredID }
+                params: { 'id': $scope.enteredID , 'password' : $scope.enteredPass}
             }).success(function (data, status, headers, config) {
-                console.log((typeof data));
+                //console.log((typeof data));
+                
                 if (typeof data !== 'string') {
                     $scope.session = data;
                     $scope.userInst();
+                    login = true;
                 }
-                else
+                else{
                     $scope.notification = data;
+                }
 
             }).error(function (data, status, headers, config) {
                 alert('Error:' + data);
             });
         }
+        
+        
 
 
         $scope.symbolName = null;

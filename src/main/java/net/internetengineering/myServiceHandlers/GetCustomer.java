@@ -24,6 +24,7 @@ import net.internetengineering.exception.DataIllegalException;
 import net.internetengineering.server.StockMarket;
 import net.internetengineering.utils.HSQLUtil;
 import net.internetengineering.utils.JsonBuilder;
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 /**
@@ -39,18 +40,35 @@ public class GetCustomer extends HttpServlet{
         Connection dbConnection = null;
             try {
                 String id = request.getParameter("id");
+                String pass = request.getParameter("password");
+                
                 if (id == null || id.isEmpty()) {
                     throw new DataIllegalException("Mismatched Parameters");
                 }
+                
+                if (pass == null || pass.isEmpty()) {
+                    throw new DataIllegalException("Mismatched Parameters");
+                }
+                
                 dbConnection = HSQLUtil.getInstance().openConnectioin();
-                if (!StockMarket.getInstance().containCustomer(id,dbConnection)) {
-                    throw new DataIllegalException("Invalid ID");
+                if (!StockMarket.getInstance().authenticateCustomer(id,pass,dbConnection)) {
+                    throw new DataIllegalException("Invalid Username or Password");
                 }
                 Customer c = StockMarket.getInstance().getCustomer(id,dbConnection);
                 Map<String,Object> map = new HashMap<String, Object>();
                 map.put("id", c.getId());
                 map.put("name", c.getName());
+                map.put("family", c.getFamily());
+                map.put("email", c.getEmail());
                 map.put("money", c.getMoney());
+                
+                JSONArray roles = new JSONArray();
+                for (int i = 0; i < c.getRoles().size(); i++) {
+                    roles.put(c.getRoles().get(i).name);
+                }  
+                
+                map.put("roles", roles);
+                
                 JsonBuilder.writeToJSON(map, response);
             }catch (DataIllegalException ex){
                     out.println(ex.getMessage());
