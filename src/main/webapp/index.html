@@ -68,14 +68,14 @@ and open the template in the editor.
               <label>
                 نام خانوادگی<span class="req">*</span>
               </label>
-              <input type="text" required autocomplete="off"/>
+                <input type="text" required autocomplete="off" ng-model="family"/>
             </div>
               
               <div class="field-wrap">
               <label>
                 نام<span class="req">*</span>
               </label>
-              <input type="text" required autocomplete="off"/>
+                  <input type="text" required autocomplete="off" ng-model="name"/>
             </div>
           </div>
 
@@ -83,14 +83,14 @@ and open the template in the editor.
             <label>
               پست الکترونیکی<span class="req">*</span>
             </label>
-            <input type="email" required autocomplete="off"/>
+              <input type="email" required autocomplete="off" ng-model="email"/>
           </div>
               
           <div class="field-wrap">
             <label>
               نام کاربری<span class="req">*</span>
             </label>
-            <input type="text" required autocomplete="off" />
+              <input type="text" required autocomplete="off" ng-model="username"/>
           </div>    
           
           <div class="top-row">
@@ -98,7 +98,7 @@ and open the template in the editor.
             <label>
              تکرار رمز عبور<span class="req">*</span>
             </label>
-               <input type="password" required autocomplete="off" />
+               <input type="password" required autocomplete="off" ng-model="password"/>
           </div> 
               
               
@@ -106,12 +106,12 @@ and open the template in the editor.
             <label>
               رمز عبور<span class="req">*</span>
             </label>
-              <input type="password" required autocomplete="off"/>
+              <input type="password" required autocomplete="off" ng-model="rpassword"/>
           </div>
               
           </div>
           
-              <button type="submit" class="button button-block" >ثبت</button>
+              <button type="submit" class="button button-block" ng-click="ctrl.doSignup(family,name,email,username,password,rpassword)">ثبت</button>
           
           </form>
 

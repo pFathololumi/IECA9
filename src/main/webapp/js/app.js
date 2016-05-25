@@ -13,7 +13,7 @@
         $scope.isLogin = login;    
     
         $scope.symbolsQ = [];
-        $scope.userInst = [];
+        $scope.userInstList = [];
         $scope.activeContent = 'content.html';
         $scope.init = function () {
             $http({
@@ -41,7 +41,7 @@
                 url: 'getcustomerins',
                 params: { 'id': $scope.enteredID }
             }).success(function (data, status, headers, config) {
-                $scope.userInst = data;
+                $scope.userInstList = data;
 
             }).error(function (data, status, headers, config) {
                 //alert('Error:' + data);
@@ -69,17 +69,45 @@
                     $scope.session = data;
                     $scope.userInst();
                     login = true;
+                    alert('login');
                 }
                 else{
                     $scope.notification = data;
+                    alert(data);
                 }
 
+                
             }).error(function (data, status, headers, config) {
                 alert('Error:' + data);
             });
         }
         
+        this.doSignup = function(family,name,email,username,password,rpassword){
+            
+            if(password !== rpassword){
+                alert('confirm password does not match');
+                return;
+            }
+            $http({
+                method: 'GET',
+                url: 'add',
+                params: { 'family': family, 'name': name, 'email':email, 'id':username, 'password' : password}
+            }).success(function (data, status, headers, config) {
+                //console.log((typeof data));
+                
+                if (typeof data !== 'string') {
+                    alert(data);
+                }
+                else{
+                    $scope.notification = data;
+                    alert(data);
+                }
+
+            }).error(function (data, status, headers, config) {
+                alert('Error:' + data);
+            });
         
+        }
 
 
         $scope.symbolName = null;

@@ -19,6 +19,7 @@ import net.internetengineering.domain.Role;
 import net.internetengineering.exception.DBException;
 import net.internetengineering.model.RoleDAO;
 import net.internetengineering.utils.HSQLUtil;
+import net.internetengineering.utils.HashUtil;
 
 @WebServlet("/add")
 public class AddCustomer extends HttpServlet{
@@ -41,7 +42,7 @@ public class AddCustomer extends HttpServlet{
                     throw new DataIllegalException("Repeated id");
 
                 } else {
-                    Customer c = new Customer(id, name, family,email,password);
+                    Customer c = new Customer(id, name, family,email,HashUtil.md5(password) );
                     c.addRole(RoleDAO.findByRoleName("typical", dbConnection));
                     StockMarket.getInstance().addNewCustomer(c,dbConnection);
                     out.println("New user is added");
