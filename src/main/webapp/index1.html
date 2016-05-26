@@ -8,15 +8,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Stock Market</title>
     <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/modern-business.css" rel="stylesheet">
     <link href="css/mystyle.css" rel="stylesheet">
+    <link href="fonts/myFonts.css" rel="stylesheet">
     <link href="css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="css/profile/form-elements.css" type="text/css">
+    <link rel="stylesheet" href="css/profile/style.css" type="text/css">
 </head>
 
-<body  ng-controller="MarketController as ctrl" >
+<body>
 
     <!-- Navigation -->
-    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <nav class="navbar navbar-inverse navbar-fixed-top Font" role="navigation">
         <div class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
@@ -30,16 +32,21 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">مدیریت<b class="caret"></b></a>
                         <ul class="dropdown-menu">
                             <li>
-                                <a href="portfolio-1-col.html">تعیین سقف معاملات</a>
+                                <a href="portfolio-1-col.html">تعیین سقف معاملات&nbsp;
+                                <i class="fa fa-angle-left" aria-hidden="true"></i>
+                                </a>
                             </li>
                             <li>
-                                <a href="portfolio-2-col.html">تایید نماد های جدید</a>
+                                <a href="portfolio-2-col.html">تایید نماد های جدید&nbsp;
+                                <i class="fa fa-angle-left" aria-hidden="true"></i></a>
                             </li>
                             <li>
-                                <a href="portfolio-2-col.html">گزارش و فایل پشتیبان</a>
+                                <a href="" ng-click="activeContent='report.html'">گزارش و فایل پشتیبان&nbsp;
+                                <i class="fa fa-angle-left" aria-hidden="true"></i></a>
                             </li>
                             <li>
-                                <a href="portfolio-2-col.html">مدیریت کاربران</a>
+                                <a href="portfolio-2-col.html">مدیریت کاربران&nbsp;
+                                <i class="fa fa-angle-left" aria-hidden="true"></i></a>
                             </li>
                         </ul>
                     </li>
@@ -47,10 +54,12 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">مالی<b class="caret"></b></a>
                         <ul class="dropdown-menu">
                             <li>
-                                <a href="portfolio-1-col.html">تایید درخواست تغییر اعتبار</a>
+                                <a href="portfolio-1-col.html">تایید درخواست تغییر اعتبار&nbsp;
+                                <i class="fa fa-angle-left" aria-hidden="true"></i></a>
                             </li>
                             <li>
-                                <a href="portfolio-2-col.html">تایید معاملات پر ارزش</a>
+                                <a href="portfolio-2-col.html">تایید معاملات پر ارزش&nbsp;
+                                <i class="fa fa-angle-left" aria-hidden="true"></i></a>
                             </li>
                         </ul>
                     </li>
@@ -58,16 +67,20 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">بازار سهام<b class="caret"></b></a>
                         <ul class="dropdown-menu">
                             <li>
-                                <a href="portfolio-1-col.html">مشاهده وضعیت بازار</a>
+                                <a href="portfolio-1-col.html">مشاهده وضعیت بازار&nbsp;
+                                <i class="fa fa-angle-left" aria-hidden="true"></i></a>
                             </li>
                             <li>
-                                <a href="portfolio-2-col.html">درخواست خرید و فروش</a>
+                                <a href="portfolio-2-col.html">درخواست خرید و فروش&nbsp;
+                                <i class="fa fa-angle-left" aria-hidden="true"></i></a>
                             </li>
                             <li>
-                                <a href="portfolio-3-col.html">درخواست تغییر اعتبار</a>
+                                <a href="portfolio-3-col.html">درخواست تغییر اعتبار&nbsp;
+                                <i class="fa fa-angle-left" aria-hidden="true"></i></a>
                             </li>
                             <li>
-                                <a href="portfolio-3-col.html">اضافه کردن سهام</a>
+                                <a href="portfolio-3-col.html">اضافه کردن سهام&nbsp;
+                                <i class="fa fa-angle-left" aria-hidden="true"></i></a>
                             </li>
                         </ul>
                     </li>
@@ -75,10 +88,12 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">شخصی<b class="caret"></b></a>
                         <ul class="dropdown-menu">
                             <li>
-                                <a href="blog-home-1.html">پروفایل من</a>
+                                <a href="" ng-click="activeContent='profile.html'">پروفایل من&nbsp;
+                                <i class="fa fa-angle-left" aria-hidden="true"></i></a>
                             </li>
                             <li>
-                                <a href="blog-home-2.html">خروج</a>
+                                <a href="blog-home-2.html">خروج&nbsp;
+                                <i class="fa fa-angle-left" aria-hidden="true"></i></a>
                             </li>
                         </ul>
                     </li>
@@ -154,7 +169,7 @@
     <div class="container">
 
         <div ng-include="activeContent"></div>
-
+        
     <footer>
         <div class="row">
             <div class="col-lg-12" style="text-align: center">

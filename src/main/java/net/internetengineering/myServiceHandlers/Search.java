@@ -23,7 +23,7 @@ import java.sql.*;
 
  
 
-@WebServlet("/admin/reports/search")
+@WebServlet("/index1.html/search")
 public class Search extends HttpServlet{
 
     @Override

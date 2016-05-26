@@ -225,7 +225,7 @@
         this.search = function (buyerID, buyerName, buyerFamily, sbuyerBalance, ebuyerBalance, sellerID, sellerName, sellerFamily, ssellerBalance, esellerBalance, instrument, type, startQuantity, endQuantity, startPrice, endPrice, startDate, endDate) {
             $http({
                 method: 'GET',
-                url: 'search',
+                url: 'index1.html/search',
                 params: {
                     'buyerID': buyerID, 'buyerName': buyerName, 'buyerFamily': buyerFamily, 'sbuyerBalance': sbuyerBalance, 'ebuyerBalance': ebuyerBalance,
                     'sellerID': sellerID, 'sellerName': sellerName, 'sellerFamily': sellerFamily, 'ssellerBalance': ssellerBalance, 'esellerBalance': esellerBalance,
