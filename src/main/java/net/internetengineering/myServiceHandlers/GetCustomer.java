@@ -39,21 +39,12 @@ public class GetCustomer extends HttpServlet{
         PrintWriter out= response.getWriter();
         Connection dbConnection = null;
             try {
-                String id = request.getParameter("id");
-                String pass = request.getParameter("password");
+                String id = request.getRemoteUser();
                 
                 if (id == null || id.isEmpty()) {
                     throw new DataIllegalException("Mismatched Parameters");
                 }
-                
-                if (pass == null || pass.isEmpty()) {
-                    throw new DataIllegalException("Mismatched Parameters");
-                }
-                
                 dbConnection = HSQLUtil.getInstance().openConnectioin();
-                if (!StockMarket.getInstance().authenticateCustomer(id,pass,dbConnection)) {
-                    throw new DataIllegalException("Invalid Username or Password");
-                }
                 Customer c = StockMarket.getInstance().getCustomer(id,dbConnection);
                 Map<String,Object> map = new HashMap<String, Object>();
                 map.put("id", c.getId());

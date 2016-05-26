@@ -56,12 +56,10 @@
             $scope.notification = null;
         }
         
-
         this.doLogin = function () {
             $http({
                 method: 'GET',
                 url: 'getcustomer',
-                params: { 'id': $scope.enteredID , 'password' : $scope.enteredPass}
             }).success(function (data, status, headers, config) {
                 //console.log((typeof data));
                 
@@ -69,15 +67,23 @@
                     $scope.session = data;
                     $scope.userInst();
                     login = true;
-                    alert('login');
                 }
                 else{
                     $scope.notification = data;
                     alert(data);
                 }
-
-                
             }).error(function (data, status, headers, config) {
+                alert('Error:' + data);
+            });
+        }
+        
+        this.doLogout = function () {
+            $http({
+                method: 'GET',
+                url: 'logout',
+            }).success(function (data) {
+                window.location.reload();
+            }).error(function (data) {
                 alert('Error:' + data);
             });
         }

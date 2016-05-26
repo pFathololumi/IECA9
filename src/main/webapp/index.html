@@ -1,133 +1,195 @@
-<!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
-<html> 
-    <head>
-        <meta charset="UTF-8">
-        <title>stock market</title>
-        <meta charset="windows-1256">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        
-        <link href='http://fonts.googleapis.com/css?family=Titillium+Web:400,300,600' rel='stylesheet' type='text/css'>
-    
-        <link rel="stylesheet" href="css/normalize.css">
-        <link rel="stylesheet" href="css/style.css">
-        <link rel="stylesheet" href="fonts/myFonts.css">
+﻿﻿<!DOCTYPE html>
+<html lang="en" ng-app="stockmarket" > 
 
-    </head>
-    <body ng-app="stockmarket" ng-controller="MarketController as ctrl">
+<head>
 
-    <div class="form Font">
-      
-      <ul class="tab-group">
-        <li class="tab "><a href="#signup">ثبت نام</a></li>
-        <li class="tab active"><a href="#login">ورود</a></li>
-      </ul>
-      
-      <div class="tab-content">
-        
-        <div id="login">   
-          <h1>خوش آمدید</h1>
-          
-          <form >
-          
-            <div class="field-wrap">
-            <label>
-              نام کاربری<span class="req">*</span>
-            </label>
-            <input type="text" required autocomplete="off" autofocus ng-model="enteredID"/>
-          </div>
-          
-          <div class="field-wrap">
-            <label>
-              رمز عبور<span class="req">*</span>
-            </label>
-            <input type="password" required autocomplete="off" ng-model="enteredPass"/>
-          </div>
-          
-          <!--<p class="forgot"><a href="#">Forgot Password?</a></p>-->
-          
-          <button class="button button-block" ng-click="ctrl.doLogin()" target="_self">ورود</button>
-          
-          </form>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Stock Market</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/modern-business.css" rel="stylesheet">
+    <link href="css/mystyle.css" rel="stylesheet">
+    <link href="fonts/myFonts.css" rel="stylesheet">
+    <link href="css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="css/profile/form-elements.css" type="text/css">
+    <link rel="stylesheet" href="css/profile/style.css" type="text/css">
+</head>
 
-        </div>
-          
-          
-          <div id="signup">   
-          <h1>ثبت نام کنید</h1>
-          
-          <form method="post" name="myForm">
-          
-          <div class="top-row">
-        
-            <div class="field-wrap">
-              <label>
-                نام خانوادگی<span class="req">*</span>
-              </label>
-                <input type="text" required autocomplete="off" ng-model="family"/>
+<body  ng-controller="MarketController as ctrl" data-ng-init="ctrl.doLogin()" >
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-inverse navbar-fixed-top Font" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div ng-show="session" class="navbar-header">
+                <div class="navbar-brand">خوش آمدید {{session.name}}</div>
             </div>
-              
-              <div class="field-wrap">
-              <label>
-                نام<span class="req">*</span>
-              </label>
-                  <input type="text" required autocomplete="off" ng-model="name"/>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">مدیریت<b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="portfolio-1-col.html">تعیین سقف معاملات&nbsp;
+                                <i class="fa fa-angle-left" aria-hidden="true"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="portfolio-2-col.html">تایید نماد های جدید&nbsp;
+                                <i class="fa fa-angle-left" aria-hidden="true"></i></a>
+                            </li>
+                            <li>
+                                <a href="" ng-click="activeContent='report.html'">گزارش و فایل پشتیبان&nbsp;
+                                <i class="fa fa-angle-left" aria-hidden="true"></i></a>
+                            </li>
+                            <li>
+                                <a href="portfolio-2-col.html">مدیریت کاربران&nbsp;
+                                <i class="fa fa-angle-left" aria-hidden="true"></i></a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">مالی<b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="portfolio-1-col.html">تایید درخواست تغییر اعتبار&nbsp;
+                                <i class="fa fa-angle-left" aria-hidden="true"></i></a>
+                            </li>
+                            <li>
+                                <a href="portfolio-2-col.html">تایید معاملات پر ارزش&nbsp;
+                                <i class="fa fa-angle-left" aria-hidden="true"></i></a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">بازار سهام<b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="portfolio-1-col.html">مشاهده وضعیت بازار&nbsp;
+                                <i class="fa fa-angle-left" aria-hidden="true"></i></a>
+                            </li>
+                            <li>
+                                <a href="portfolio-2-col.html">درخواست خرید و فروش&nbsp;
+                                <i class="fa fa-angle-left" aria-hidden="true"></i></a>
+                            </li>
+                            <li>
+                                <a href="portfolio-3-col.html">درخواست تغییر اعتبار&nbsp;
+                                <i class="fa fa-angle-left" aria-hidden="true"></i></a>
+                            </li>
+                            <li>
+                                <a href="portfolio-3-col.html">اضافه کردن سهام&nbsp;
+                                <i class="fa fa-angle-left" aria-hidden="true"></i></a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">شخصی<b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="" ng-click="activeContent='profile.html'">پروفایل من&nbsp;
+                                <i class="fa fa-angle-left" aria-hidden="true"></i></a>
+                            </li>
+                            <li>
+                                <a href="" ng-click="ctrl.doLogout()">خروج&nbsp;
+                                <i class="fa fa-angle-left" aria-hidden="true"></i></a>
+                            </li>
+                        </ul>
+                    </li>
+<!--                    <li ng-show="!session">
+                        <div class="input-group login-wrapper">
+                            <input type="text" ng-model="enteredID" class="form-control" placeholder="Enter your ID">
+                            <span class="input-group-btn">
+                                <button ng-click="ctrl.doLogin()" class="btn btn-secondary btn-default" type="button">Sign in</button>
+                            </span>
+                        </div>
+                    </li>-->
+<!--                    <li ng-show="session">
+                        <div class="navbar-header">
+                            <div class="navbar-brand">موجودی: {{session.money}}</div>
+                        </div>
+                    </li>
+                    <li ng-show="session">
+                        <div class="navbar-header">
+                            <div class="navbar-brand">خوش آمدید {{session.name}}</div>
+                        </div>
+                    </li>-->
+
+                </ul>
             </div>
-          </div>
-
-          <div class="field-wrap">
-            <label>
-              پست الکترونیکی<span class="req">*</span>
-            </label>
-              <input type="email" required autocomplete="off" ng-model="email"/>
-          </div>
-              
-          <div class="field-wrap">
-            <label>
-              نام کاربری<span class="req">*</span>
-            </label>
-              <input type="text" required autocomplete="off" ng-model="username"/>
-          </div>    
-          
-          <div class="top-row">
-           <div class="field-wrap">
-            <label>
-             تکرار رمز عبور<span class="req">*</span>
-            </label>
-               <input type="password" required autocomplete="off" ng-model="password"/>
-          </div> 
-              
-              
-          <div class="field-wrap">
-            <label>
-              رمز عبور<span class="req">*</span>
-            </label>
-              <input type="password" required autocomplete="off" ng-model="rpassword"/>
-          </div>
-              
-          </div>
-          
-              <button type="submit" class="button button-block" ng-click="ctrl.doSignup(family,name,email,username,password,rpassword)">ثبت</button>
-          
-          </form>
-
+            <!-- /.navbar-collapse -->
         </div>
-        
-      </div><!-- tab-content -->
-      
-</div> <!-- /form -->
-    <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+        <!-- /.container -->
+    </nav>
 
+    <div class="navbar-inverse navbar" ng-show="notification" style="background-color: #555">
+
+        <div class="navbar-header navbar-right">
+            <a href="" ng-click="ctrl.closeNotificationBar()"> <div class="navbar-brand">close</div> </<a>
+        </div>
+        <div class="navbar-header">
+            <div class="navbar-brand">{{notification}}</div>
+        </div>
+    </div>
+    <!-- Header Carousel -->
+    <header id="myCarousel" class="carousel slide">
+
+        <!-- Wrapper for slides -->
+        <div class="carousel-inner">
+            <div class="item active">
+                <div class="fill full-size" style="background-image:url('pics/timingstockr.jpg'); background-size : 100% 100%;"></div>
+                <div class="carousel-caption">
+                    <h2>رشد بی سابقه</h2>
+                </div>
+            </div>
+            <div class="item">
+                <div class="fill full-size" style="background-image:url('pics/stock-market-down.png'); background-size : 100% 100%;"></div>
+                <div class="carousel-caption">
+                    <h2>بازگشت تضمینی سود</h2>
+                </div>
+            </div>
+            <div class="item">
+                <div class="fill full-size" style="background-image:url('pics/ta2.png'); background-size : 100% 100%;"></div>
+                <div class="carousel-caption">
+                    <h2>کمک به رشد اقتصادی</h2>
+                </div>
+            </div>
+        </div>
+
+        <!-- Controls -->
+        <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+            <span class="icon-prev"></span>
+        </a>
+        <a class="right carousel-control" href="#myCarousel" data-slide="next">
+            <span class="icon-next"></span>
+        </a>
+    </header>
+
+    <div class="container">
+
+        <div ng-include="activeContent"></div>
+
+    <footer>
+        <div class="row">
+            <div class="col-lg-12" style="text-align: center">
+                <p>کلیه حقوق این سایت مربوط سازمان مدیریت و سرمایه گذاری کل کشور است.</p>
+            </div>
+        </div>
+    </footer>
+
+    </div>
     <script type="text/javascript" src="lib/jquery.js"></script>
-    <!-- Angular -->
     <script type="text/javascript" src="lib/angular.min.js"></script>
-        
-    <script src="js/index.js"></script>
+    <script src="lib/bootstrap.min.js"></script>
     <script type="text/javascript" src="js/app.js"></script>
+    <!-- Script to Activate the Carousel -->
+    <script>
+        $('.carousel').carousel({
+            interval: 5000 //changes the speed
+        })
+    </script>
 
-  </body>
+</body>
 </html>

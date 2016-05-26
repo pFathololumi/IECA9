@@ -42,7 +42,8 @@ public class AddCustomer extends HttpServlet{
                     throw new DataIllegalException("Repeated id");
 
                 } else {
-                    Customer c = new Customer(id, name, family,email,HashUtil.md5(password) );
+//                    Customer c = new Customer(id, name, family,email,HashUtil.md5(password) );
+                    Customer c = new Customer(id, name, family,email,password );
                     c.addRole(RoleDAO.findByRoleName("typical", dbConnection));
                     StockMarket.getInstance().addNewCustomer(c,dbConnection);
                     out.println("New user is added");

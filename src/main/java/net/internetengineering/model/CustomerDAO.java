@@ -51,7 +51,8 @@ public class CustomerDAO {
     }
     
     public static void insertAdmin(Connection dbConnection) throws SQLException{
-        Customer admin = new Customer("1", "admin", "admin","admin@stockmarket.com",HashUtil.md5( "password"));
+//        Customer admin = new Customer("1", "admin", "admin","admin@stockmarket.com",HashUtil.md5( "password"));
+        Customer admin = new Customer("1", "admin", "admin","admin@stockmarket.com", "password");
         admin.addRole(RoleDAO.findByRoleName("admin", dbConnection));
         addNewCustomer(admin, dbConnection);
     }
@@ -97,7 +98,8 @@ public class CustomerDAO {
     public static boolean authenticateCustomer(String id, String pass, Connection dbConnection) throws SQLException {
         PreparedStatement preparedStatement = dbConnection.prepareStatement(selectByIdAndPassQuery);
         preparedStatement.setString(1, id);
-        preparedStatement.setString(2, HashUtil.md5(pass));
+//        preparedStatement.setString(2, HashUtil.md5(pass));
+        preparedStatement.setString(2, pass);
         ResultSet rs = preparedStatement.executeQuery();
         if(rs.next())
             return true;
