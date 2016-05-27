@@ -252,5 +252,25 @@
         }
 
     }]);
+    
+    app.controller('AddNewSymbolCtrl',['$scope', '$http', function ($scope, $http){
+        $scope.notification = null;
+        this.closeNotificationBar = function () {
+            $scope.notification = null;
+        }
+        
+        this.addNewSymbol = function (symbol,amount,price){
+            alert(symbol+'-'+amount+'-'+price);
+            $http({
+                method: 'GET',
+                url: 'addnewsymbol',
+                params: { 'symbol': symbol,'amount': amount, 'price': price }
+            }).success(function (data, status, headers, config) {
+                alert('Success: '+data)
+            }).error(function (data, status, headers, config) {
+                alert('Error:' + data);
+            });
+        }
+    }])
 
 })();

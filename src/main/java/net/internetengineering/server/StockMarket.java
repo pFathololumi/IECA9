@@ -54,17 +54,14 @@ public class StockMarket {
         return CustomerDAO.findByID(id, dbConnection).hasEnoughMoney(amount);
     }
 
-    public void executeSellingOffer(PrintWriter out, SellingOffer offer, String symbol, Connection dbConnection) throws DataIllegalException, DBException, SQLException{
-        if(offer.isAdminOffer())
-            addOrUpdateInstrumentByAdmin(symbol,offer,dbConnection);
-            Instrument instrument = loadVerifiedParameters(offer,symbol,dbConnection);
-
-            Customer customer = CustomerDAO.findByID(offer.getID(),dbConnection);
-            if(!customer.hasEnoughStock(symbol, offer) && !offer.isAdminOffer()){
-                throw new DataIllegalException("Not enough share");
-            }
-            instrument.executeSellingByType(out,offer,dbConnection);
-            OfferingDAO.insertNewOffering(offer,symbol, dbConnection);
+    public void executeSellingOffer(PrintWriter out, SellingOffer offer, String symbol, Connection dbConnection) throws DataIllegalException, DBException, SQLException{            
+        Instrument instrument = loadVerifiedParameters(offer,symbol,dbConnection);
+        Customer customer = CustomerDAO.findByID(offer.getID(),dbConnection);
+        if(!customer.hasEnoughStock(symbol, offer) && !offer.isAdminOffer()){
+            throw new DataIllegalException("Not enough share");
+        }
+        instrument.executeSellingByType(out,offer,dbConnection);
+        OfferingDAO.insertNewOffering(offer,symbol, dbConnection);
     }
 
     public void executeBuyingOffer(PrintWriter out, BuyingOffer offer, String symbol,Connection dbConnection) throws DataIllegalException, SQLException, DBException{
@@ -81,19 +78,18 @@ public class StockMarket {
         OfferingDAO.insertNewOffering(offer,symbol ,dbConnection);
     }
 
-    private void addOrUpdateInstrumentByAdmin(String symbol,Offering offer,Connection dbConnection) throws SQLException, DBException {
+    public void addOrUpdateInstrumentByAdmin(String symbol,Offering offer,Connection dbConnection) throws SQLException, DBException {
     	boolean flag = false;
     	for(Instrument i : getInstruments(dbConnection)){
-			if(i.symbolIsMatched(symbol)){
-				i.changeQuantity("add", offer.getQuantity());
-                                InstrumentDAO.updateQuantity("1", symbol, i.getQuantity(), dbConnection);
-				flag = true;
-				break;
-			}
-		}
+            if(i.symbolIsMatched(symbol)){
+                i.changeQuantity("add", offer.getQuantity());
+                InstrumentDAO.updateQuantity(offer.getID(), symbol, i.getQuantity(), dbConnection);
+                flag = true;
+                break;
+            }
+        }
     	if(!flag)
-//    		instruments.add(new Instrument(symbol, offer.getQuantity()));
-                InstrumentDAO.insertNewInstrument("1", symbol, offer.getQuantity(), dbConnection);
+            InstrumentDAO.insertNewInstrument(offer.getID(), symbol, offer.getQuantity(), dbConnection);
         
     }
     private void deleteOrUpdateInstrumentByAdmin(String symbol,Offering offer, Connection dbConnection) throws SQLException, DBException {

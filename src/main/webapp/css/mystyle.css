@@ -113,3 +113,7 @@ footer {
 	display: inline;
 	margin: 1%;
 }
+
+.center-alignment{
+    margin: 0 auto;
+}
