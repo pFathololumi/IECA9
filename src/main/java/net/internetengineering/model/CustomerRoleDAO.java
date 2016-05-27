@@ -17,15 +17,15 @@ import net.internetengineering.exception.DBException;
  */
 public class CustomerRoleDAO {
     private final static String dropIfExistQuery = "drop table role_customer if exists";
-    private final static String createCustomerRoleTableQuery = "create table role_customer (\n" +
-            "    customer_id varchar(80) not null," +
+    private final static String createCustomerRoleTableQuery = "create table role_customer (" +
+            "    id varchar(80) not null," +
             "    role_name varchar(80) not null," +
-            "    primary key (customer_id,role_name)," +
-            "    constraint custom_id_fk foreign key(customer_id) references customer(id) on delete cascade," +
+            "    primary key (id,role_name)," +
+            "    constraint custom_id_fk foreign key(id) references customer(id) on delete cascade," +
             "    constraint role_name_fk foreign key(role_name) references role(name) on delete cascade" +
             ");";
     private final static String insertNewCustomerRole = "insert into role_customer values (?, ?)";
-    private final static String selectByCidQuery ="select * from role_customer rc where rc.customer_id =?";
+    private final static String selectByCidQuery ="select * from role_customer rc where rc.id =?";
     
     public static void dropTableIfExist(Connection dbConnection) throws SQLException{
         dbConnection.createStatement().execute(dropIfExistQuery);

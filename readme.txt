@@ -6,10 +6,13 @@
 	java -cp hsqldb.jar org.hsqldb.util.DatabaseManagerSwing
 4) Connect to the server
 	Set 'type' to 'HSQL Database Engine Server'
-5) Build and Deploy the project
+5) put 'server.xml' in 'conf' folder of your Tomcat.
+6) put 'hsqldb.jar' in 'lib' folder of your Tomcat. ( you can find hsqldb.jar in following address: ./lib/hsqldb/hsqldb.jar )
+7) Build and Deploy the project
 	./build&deploy.sh
-6) Start Tomcat
+8) Start Tomcat
 	./startTomcat.sh
-6) configure database by calling followin URL
+9) configure database by calling followin URL
 	http://localhost:8080/stockmarket/confdb
+
 
